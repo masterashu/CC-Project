@@ -29,12 +29,18 @@ func main() {
 	} else {
 		switch os.Args[1] {
 		case "start":
+			os.Mkdir(".temp", 0777)
+			os.Chdir(".temp")
 			run()
 			break
 		case "download":
+			os.Mkdir(".temp", 0777)
+			os.Chdir(".temp")
 			download()
 			break
 		case "run":
+			os.Mkdir(".temp", 0777)
+			os.Chdir(".temp")
 			download()
 			run()
 			break
@@ -103,6 +109,7 @@ func child() {
 	must(os.Chdir("/"))
 	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 	must(cmd.Run())
+	fmt.Printf("Exited from container\n")
 }
 
 func must(err error) {
